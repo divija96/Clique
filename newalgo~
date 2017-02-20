@@ -1,0 +1,142 @@
+#include <iostream>
+using namespace std;
+int maximum=0,c[1002]={0},n;
+int graph[1002][1002]={0},d[1002]={0};
+bool found;
+
+void merge(int arr[], int l, int m, int r)
+{
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+    int L[n1], R[n2];
+
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+    i = 0; 
+    j = 0; 
+    k = l; 
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+void mergeSort(int arr[], int l, int r)
+{
+    if (l < r)
+    {
+        int m = l+(r-l)/2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+ 	merge(arr, l, m, r);
+    }
+}
+
+void clique(int u[1002],int size,int k)
+{
+    int i,unew[1002]={0},knew,j;
+    if(k==0)
+    {
+        if(size>maximum)
+        {
+            maximum=size;
+            found=true;
+        }
+        return;
+
+    }
+    while(k!=0)
+    {
+        if(size+k<=maximum)
+            return;
+         
+        for(j=0;j<n;j++)
+            if(u[j]!=0)
+            {
+                i=j;
+               
+                break;
+            }
+       
+        if(size+c[u[i]]<=maximum)
+            return;
+   
+        knew=0;
+        for(j=0;j<n;j++)
+        {
+           
+            if(graph[u[j]][u[i]]==1 && u[j]!=0)
+            {
+                   unew[knew]=u[j];
+                   knew++;
+            }
+        }
+        u[i]=0;
+        clique(unew,size+1,knew);
+        if(found==true)
+            return;
+        k--;
+    }
+    return;
+}
+int main() {
+        int e,i,j,k,a[1002]={0},x,y;
+       
+        cout<<"Enter the number of vertices:"<<endl;
+        cin>>n;
+        cout<<"Enter the number of edges:"<<endl;
+        cin>>e;
+        cout<<"Enter the edges:"<<endl;
+        for(i=0;i<e;i++)
+        {    cin>>x>>y;
+            graph[x][y]=1;
+            graph[y][x]=1;
+	    d[x]++;
+            d[y]++;
+        }
+	mergesort(d,0,n)
+        for(i=n;i>=1;i--)
+        {
+            found= false;
+            a[1002]={0};
+            k=0;
+            for(j=0;j<n;j++)
+            a[j]=0;
+            for(j=i;j<=n;j++)
+            {
+                if(graph[i][j]==1)
+                {
+                    a[k]=j;
+                    k++;
+                }
+            }
+            c[i]=0;
+            clique(a,1,k);
+            c[i]=maximum;
+        }
+    cout<<"The Maximum cique is : "<<c[1]<<endl;
+}

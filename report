@@ -1,0 +1,24 @@
+General Information about the Clique Problem 
+
+In computer science, the clique problem refers to computational problems of finding cliques (subsets of vertices, all adjacent to each other, also called complete subgraphs) in a graph.he maximum clique problem arises in the following real-world setting. Consider a social network, where the graph’s vertices represent people, and the graph’s edges represent mutual acquaintance. To find a largest subset of people who all know each other, one can systematically inspect all subsets, a process that is too time-consuming to be practical for social networks comprising more than a few dozen people. Although this brute-force search can be improved by more efficient algorithms, all of these algorithms take exponential time to solve the problem.Along with its applications in social networks, the clique problem also has many applications in bioinformatics and computational chemistry.The clique decision problem is NP-complete. It was one of Richard Karp's original 21 problems shown NP-complete in his 1972 paper "Reducibility Among Combinatorial Problems".NP-hard: if one could solve it, one could also solve the decision problem, by comparing the size of the maximum clique to the size parameter given as input in the decision problem.
+
+
+Report 
+
+Absract
+
+Given a graph, in the maximum clique problem, one desires to ,nd the largest number
+of vertices, any two of which are adjacent. A branch-and-bound algorithm for the maximum
+clique problem—which is computationally equivalent to the maximum independent (stable) set
+problem—is presented with the vertex order taken from a coloring of the vertices and with a
+new pruning strategy.
+
+Mention that the project is an implementation of the reasearch paper 'give proper heading with date and journal in which published'
+
+
+Introduction
+
+Write general information about clique given above
+
+
+
